@@ -35,4 +35,11 @@ public class PublisherTest {
             Thread.sleep(20);
         }
     }
+
+    @Test
+    public void testSendMessageToFanoutExchange() {
+        String exchangeName = "fanout.exchange";
+        String message = "hello everyone!";
+        rabbitTemplate.convertAndSend(exchangeName, "", message);
+    }
 }
