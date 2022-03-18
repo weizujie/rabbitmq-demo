@@ -7,3 +7,6 @@ spring:
     username: root
     password: toor
     virtual-host: /
+    listener:
+      simple:
+        prefetch: 1 # 每次获取 n 条消息，处理完成后才能获取下 n 条
