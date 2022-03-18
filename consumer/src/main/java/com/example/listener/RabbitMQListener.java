@@ -1,5 +1,6 @@
 package com.example.listener;
 
+import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
@@ -58,5 +59,23 @@ public class RabbitMQListener {
     ))
     public void listenDirectQueue2(String message) {
         System.out.println(">>> 接收到队列 direct.queue2 的消息：【" + message + "】");
+    }
+
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "topic.queue1"),
+            exchange = @Exchange(name = "topic.exchange", type = ExchangeTypes.TOPIC),
+            key = "China.#"
+    ))
+    public void listenTopicQueue1(String message) {
+        System.out.println(">>> 接收到队列 topic.queue1 的消息：【" + message + "】");
+    }
+
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "topic.queue2"),
+            exchange = @Exchange(name = "topic.exchange", type = ExchangeTypes.TOPIC),
+            key = "#.news"
+    ))
+    public void listenTopicQueue2(String message) {
+        System.out.println(">>> 接收到队列 topic.queue2 的消息：【" + message + "】");
     }
 }
