@@ -42,4 +42,11 @@ public class PublisherTest {
         String message = "hello everyone!";
         rabbitTemplate.convertAndSend(exchangeName, "", message);
     }
+
+    @Test
+    public void testSendMessageToDirectExchange() {
+        String exchangeName = "direct.exchange";
+        String message = "hello red!";
+        rabbitTemplate.convertAndSend(exchangeName, "red", message);
+    }
 }
